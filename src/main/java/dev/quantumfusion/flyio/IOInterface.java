@@ -1,7 +1,7 @@
 package dev.quantumfusion.flyio;
 
 @SuppressWarnings("unused") // good morning intellij this is a library
-public interface IOInterfrace extends AutoCloseable {
+public interface IOInterface extends AutoCloseable {
 
 	void rewind();
 

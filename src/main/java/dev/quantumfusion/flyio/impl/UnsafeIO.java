@@ -1,7 +1,7 @@
 package dev.quantumfusion.flyio.impl;
 
 
-import dev.quantumfusion.flyio.IOInterfrace;
+import dev.quantumfusion.flyio.IOInterface;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
@@ -13,7 +13,7 @@ import java.nio.Buffer;
  */
 @SuppressWarnings({"AccessStaticViaInstance", "FinalMethodInFinalClass", "unused", "FinalStaticMethod"})
 // if the jvm sees us import unsafe, it will explode:tm::tm:
-public final class UnsafeIO implements IOInterfrace {
+public final class UnsafeIO implements IOInterface {
 	private static final sun.misc.Unsafe UNSAFE = getUnsafeInstance();
 	private static final int BOOLEAN_OFFSET = UNSAFE.ARRAY_BOOLEAN_BASE_OFFSET;
 	private static final int BYTE_OFFSET = UNSAFE.ARRAY_BYTE_BASE_OFFSET;

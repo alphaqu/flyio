@@ -3,9 +3,9 @@ package dev.quantumfusion.flyio;
 import org.junit.jupiter.api.Assertions;
 
 public class IOInterfaceTest {
-	private final IOInterfrace io;
+	private final IOInterface io;
 
-	public IOInterfaceTest(IOInterfrace io) {
+	public IOInterfaceTest(IOInterface io) {
 		this.io = io;
 	}
 

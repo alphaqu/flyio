@@ -37,7 +37,7 @@ public class IOTests {
 	}
 
 
-	private static void testIO(IntFunction<IOInterfrace> creator) {
+	private static void testIO(IntFunction<IOInterface> creator) {
 		final IOInterfaceTest ioInterfaceTest = new IOInterfaceTest(creator.apply(1024 * DEPTH));
 		ioInterfaceTest.putValues(DEPTH);
 

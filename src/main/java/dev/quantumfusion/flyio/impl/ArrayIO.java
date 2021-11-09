@@ -1,6 +1,6 @@
 package dev.quantumfusion.flyio.impl;
 
-import dev.quantumfusion.flyio.IOInterfrace;
+import dev.quantumfusion.flyio.IOInterface;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
  * ArrayIO. An IO that internally uses an array.
  */
 @SuppressWarnings({"FinalMethodInFinalClass", "FinalStaticMethod", "unused"})
-public final class ArrayIO implements IOInterfrace {
+public final class ArrayIO implements IOInterface {
 	private final byte[] bytes;
 	private int pos;
 

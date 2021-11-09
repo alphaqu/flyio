@@ -1,13 +1,13 @@
 package dev.quantumfusion.flyio.impl;
 
-import dev.quantumfusion.flyio.IOInterfrace;
+import dev.quantumfusion.flyio.IOInterface;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"FinalMethodInFinalClass", "FinalStaticMethod"})
-public final class InputStreamIO implements IOInterfrace {
+public final class InputStreamIO implements IOInterface {
 	private final InputStream inputStream;
 	private int pos = 0;
 

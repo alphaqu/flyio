@@ -1,6 +1,6 @@
 package dev.quantumfusion.flyio.impl;
 
-import dev.quantumfusion.flyio.IOInterfrace;
+import dev.quantumfusion.flyio.IOInterface;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
  * <h2>Useful for debug and/or when UnsafeIO is unavailable.</h2>
  */
 @SuppressWarnings({"FinalMethodInFinalClass", "FinalStaticMethod", "unused"})
-public final class ByteBufferIO implements IOInterfrace {
+public final class ByteBufferIO implements IOInterface {
 	private final ByteBuffer byteBuffer;
 
 	private ByteBufferIO(final ByteBuffer buffer) {
