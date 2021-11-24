@@ -1,11 +1,12 @@
 package dev.quantumfusion.flyio;
 
+import dev.quantumfusion.flyio.io.DualIO;
 import org.junit.jupiter.api.Assertions;
 
 public class IOInterfaceTest {
-	private final IOInterface io;
+	private final DualIO io;
 
-	public IOInterfaceTest(IOInterface io) {
+	public IOInterfaceTest(DualIO io) {
 		this.io = io;
 	}
 

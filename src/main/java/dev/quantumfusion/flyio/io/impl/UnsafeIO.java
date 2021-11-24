@@ -1,11 +1,10 @@
-package dev.quantumfusion.flyio.impl;
+package dev.quantumfusion.flyio.io.impl;
 
 
-import dev.quantumfusion.flyio.IOInterface;
+import dev.quantumfusion.flyio.io.DualIO;
+import dev.quantumfusion.flyio.UnsafeUtil;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.nio.Buffer;
 
 /**
@@ -13,8 +12,8 @@ import java.nio.Buffer;
  */
 @SuppressWarnings({"AccessStaticViaInstance", "FinalMethodInFinalClass", "unused", "FinalStaticMethod"})
 // if the jvm sees us import unsafe, it will explode:tm::tm:
-public final class UnsafeIO implements IOInterface {
-	private static final sun.misc.Unsafe UNSAFE = getUnsafeInstance();
+public final class UnsafeIO implements DualIO {
+	private static final sun.misc.Unsafe UNSAFE = UnsafeUtil.UNSAFE;
 	private static final int BOOLEAN_OFFSET = UNSAFE.ARRAY_BOOLEAN_BASE_OFFSET;
 	private static final int BYTE_OFFSET = UNSAFE.ARRAY_BYTE_BASE_OFFSET;
 	private static final int CHAR_OFFSET = UNSAFE.ARRAY_CHAR_BASE_OFFSET;
@@ -25,18 +24,12 @@ public final class UnsafeIO implements IOInterface {
 	private static final int DOUBLE_OFFSET = UNSAFE.ARRAY_DOUBLE_BASE_OFFSET;
 	private static final long STRING_FIELD_OFFSET;
 	private static final long STRING_ENCODING_OFFSET;
-	private static final long BUFFER_ADDRESS_OFFSET;
 	//If an array is below this value it will just use the regular methods. Else it will use memcpy
 	private static final int COPY_MEMORY_THRESHOLD = 10;
 
 	static {
-		try {
-			STRING_FIELD_OFFSET = UNSAFE.objectFieldOffset(String.class.getDeclaredField("value"));
-			STRING_ENCODING_OFFSET = UNSAFE.objectFieldOffset(String.class.getDeclaredField("coder"));
-			BUFFER_ADDRESS_OFFSET = UNSAFE.objectFieldOffset(Buffer.class.getDeclaredField("address"));
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException();
-		}
+		STRING_FIELD_OFFSET = UnsafeUtil.getDeclaredFieldOffset(String.class, "value");
+		STRING_ENCODING_OFFSET = UnsafeUtil.getDeclaredFieldOffset(String.class, "coder");
 	}
 
 	@Nullable
@@ -50,36 +43,18 @@ public final class UnsafeIO implements IOInterface {
 		this.bb = bb;
 	}
 
-	private static sun.misc.Unsafe getUnsafeInstance() {
-		Class<sun.misc.Unsafe> clazz = sun.misc.Unsafe.class;
-		for (Field field : clazz.getDeclaredFields()) {
-			if (!field.getType().equals(clazz))
-				continue;
-			final int modifiers = field.getModifiers();
-			if (!(Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)))
-				continue;
-			try {
-				field.setAccessible(true);
-				return (sun.misc.Unsafe) field.get(null);
-			} catch (Exception ignored) {
-			}
-			break;
-		}
-
-		throw new IllegalStateException("Unsafe is unavailable.");
-	}
-
 	public static final UnsafeIO create(final int size) {
 		return new UnsafeIO(UNSAFE.allocateMemory(size), null);
 	}
 
 	/**
 	 * Wrap a DirectButeBuffer to use directly with Unsafe.
+	 *
 	 * @return UnsafeIO
 	 */
 	public static final UnsafeIO wrap(final Buffer directByteBuffer) {
 		if (!directByteBuffer.isDirect()) throw new IllegalArgumentException("Bytebuffer is not direct");
-		return new UnsafeIO(UNSAFE.getLong(directByteBuffer, BUFFER_ADDRESS_OFFSET), directByteBuffer);
+		return new UnsafeIO(UnsafeUtil.getDeclaredFieldOffset(Buffer.class, "address"), directByteBuffer);
 	}
 
 	/**

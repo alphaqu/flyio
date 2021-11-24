@@ -1,13 +1,13 @@
-package dev.quantumfusion.flyio.impl;
+package dev.quantumfusion.flyio.io.impl;
 
-import dev.quantumfusion.flyio.IOInterface;
+import dev.quantumfusion.flyio.io.WriteIO;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"FinalMethodInFinalClass", "FinalStaticMethod"})
-public final class OutputStreamIO implements IOInterface {
+public final class OutputStreamIO implements WriteIO {
 	private final OutputStream outputStream;
 	private int pos = 0;
 
@@ -52,51 +52,6 @@ public final class OutputStreamIO implements IOInterface {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public boolean getBoolean() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public byte getByte() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public char getChar() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public short getShort() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public int getInt() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public long getLong() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public float getFloat() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public double getDouble() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public String getString() {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -175,51 +130,6 @@ public final class OutputStreamIO implements IOInterface {
 		final int length = array.length;
 		putInt(length);
 		putByteArray(array, length);
-	}
-
-	@Override
-	public boolean[] getBooleanArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public byte[] getByteArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public char[] getCharArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public short[] getShortArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public int[] getIntArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public long[] getLongArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public float[] getFloatArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public double[] getDoubleArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public String[] getStringArray(int length) {
-		throw new UnsupportedOperationException("Tried to read on an " + this.getClass().getSimpleName());
 	}
 
 	// ====================================== PUT_ARR ======================================== //

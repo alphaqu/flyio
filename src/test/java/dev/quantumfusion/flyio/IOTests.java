@@ -1,6 +1,7 @@
 package dev.quantumfusion.flyio;
 
-import dev.quantumfusion.flyio.impl.*;
+import dev.quantumfusion.flyio.io.DualIO;
+import dev.quantumfusion.flyio.io.impl.*;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
@@ -20,24 +21,24 @@ public class IOTests {
 				DynamicTest.dynamicTest("ArrayIO", () -> testIO(ArrayIO::create)),
 				DynamicTest.dynamicTest("ByteBufferIO Heap", () -> testIO(ByteBufferIO::create)),
 				DynamicTest.dynamicTest("ByteBufferIO Direct", () -> testIO(ByteBufferIO::createDirect)),
-				DynamicTest.dynamicTest("UnsafeIO", () -> testIO(UnsafeIO::create)),
-				DynamicTest.dynamicTest("Stream", () -> {
-					final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-					final IOInterfaceTest out = new IOInterfaceTest(OutputStreamIO.wrap(outputStream));
-					out.putValues(DEPTH);
-
-					VariableGenerator.reset();
-					outputStream.flush();
-
-					final IOInterfaceTest in = new IOInterfaceTest(InputStreamIO.wrap(new ByteArrayInputStream(outputStream.toByteArray())));
-					in.getValues(DEPTH);
-					VariableGenerator.reset();
-				})
+				DynamicTest.dynamicTest("UnsafeIO", () -> testIO(UnsafeIO::create))
+				//DynamicTest.dynamicTest("Stream", () -> {
+				//	final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				//	final IOInterfaceTest out = new IOInterfaceTest(OutputStreamIO.wrap(outputStream));
+				//	out.putValues(DEPTH);
+//
+				//	VariableGenerator.reset();
+				//	outputStream.flush();
+//
+				//	final IOInterfaceTest in = new IOInterfaceTest(InputStreamIO.wrap(new ByteArrayInputStream(outputStream.toByteArray())));
+				//	in.getValues(DEPTH);
+				//	VariableGenerator.reset();
+				//})
 		);
 	}
 
 
-	private static void testIO(IntFunction<IOInterface> creator) {
+	private static void testIO(IntFunction<DualIO> creator) {
 		final IOInterfaceTest ioInterfaceTest = new IOInterfaceTest(creator.apply(1024 * DEPTH));
 		ioInterfaceTest.putValues(DEPTH);
 

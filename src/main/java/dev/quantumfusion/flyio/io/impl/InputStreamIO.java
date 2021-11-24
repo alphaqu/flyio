@@ -1,13 +1,13 @@
-package dev.quantumfusion.flyio.impl;
+package dev.quantumfusion.flyio.io.impl;
 
-import dev.quantumfusion.flyio.IOInterface;
+import dev.quantumfusion.flyio.io.ReadIO;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"FinalMethodInFinalClass", "FinalStaticMethod"})
-public final class InputStreamIO implements IOInterface {
+public final class InputStreamIO implements ReadIO {
 	private final InputStream inputStream;
 	private int pos = 0;
 
@@ -115,59 +115,6 @@ public final class InputStreamIO implements IOInterface {
 	}
 
 	@Override
-	public final void putBoolean(final boolean value) {
-		putByte((byte) (value ? 1 : 0));
-	}
-
-
-	@Override
-	public final void putByte(final byte value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putChar(final char value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putShort(final short value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putInt(final int value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putLong(final long value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putFloat(final float value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putDouble(final double value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-
-	@Override
-	public final void putString(final String value) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
 	public final boolean[] getBooleanArray(final int length) {
 		final boolean[] out = new boolean[length];
 		for (int i = 0; i < length; i++)
@@ -245,50 +192,5 @@ public final class InputStreamIO implements IOInterface {
 		for (int i = 0; i < length; i++)
 			out[i] = getString();
 		return out;
-	}
-
-	@Override
-	public void putBooleanArray(boolean[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putByteArray(byte[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putCharArray(char[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putShortArray(short[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putIntArray(int[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putLongArray(long[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putFloatArray(float[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putDoubleArray(double[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public void putStringArray(String[] value, int length) {
-		throw new UnsupportedOperationException("Tried to write on an " + this.getClass().getSimpleName());
 	}
 }
